@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Property;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,13 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory()->create([
+         User::factory()->create([
              'name' => 'Martin',
              'email' => 'martin@laravel-php.com',
              'password' => bcrypt('bla123')
          ]);
 
-        \App\Models\User::factory(10)->create();
+        User::factory(10)->create();
+
+        Property::factory(10)->create(
+            [
+                'slider' => true,
+            ]
+        );
+        Property::factory(50)->create();
 
     }
 }
