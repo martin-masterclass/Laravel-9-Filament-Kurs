@@ -26,10 +26,13 @@ class PropertyResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->required()
                     ->maxLength(65535),
                 Forms\Components\TextInput::make('country')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('city')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
@@ -38,14 +41,20 @@ class PropertyResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->required(),
                 Forms\Components\TextInput::make('sqm')
-                    ->required(),
-                Forms\Components\Toggle::make('bedrooms')
-                    ->required(),
-                Forms\Components\Toggle::make('bathrooms')
-                    ->required(),
-                Forms\Components\Toggle::make('garages')
-                    ->required(),
+                    ->required()->numeric(),
+                Forms\Components\TextInput::make('bedrooms')
+                    ->required()->numeric(),
+                Forms\Components\TextInput::make('bathrooms')
+                    ->required()->numeric(),
+                Forms\Components\TextInput::make('garages')
+                    ->required()->numeric(),
                 Forms\Components\Toggle::make('slider')
+                    ->required(),
+                Forms\Components\Toggle::make('visible')
+                    ->required(),
+                Forms\Components\DatePicker::make('start_date')
+                    ->required(),
+                Forms\Components\DatePicker::make('end_date')
                     ->required(),
             ]);
     }
