@@ -18,6 +18,9 @@ class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
 
+    protected static ?string $modelLabel = 'Immobilie';
+    protected static ?string $pluralModelLabel = 'Immobilien';
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
