@@ -20,6 +20,7 @@ class PropertyFactory extends Factory
             'title' => $this->faker->realTextBetween(25,45),
             'description' => $this->faker->realTextBetween(100,150),
             'country' => $this->faker->country(),
+            'city' => $this->faker->city(),
             'address' => $this->faker->address(),
             'price' => rand(500, 5000)*1000,
             'sqm' => rand(150, 1500),
