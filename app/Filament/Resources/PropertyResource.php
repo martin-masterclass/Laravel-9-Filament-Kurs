@@ -6,6 +6,7 @@ use App\Filament\Resources\PropertyResource\Pages;
 use App\Filament\Resources\PropertyResource\RelationManagers;
 use App\Models\Property;
 use Filament\Forms;
+use Filament\Forms\Components\Tabs;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -21,42 +22,70 @@ class PropertyResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\RichEditor::make('description')
-                    ->required()
-                    ->maxLength(65535),
-                Forms\Components\TextInput::make('country')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('city')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('price')
-                    ->required(),
-                Forms\Components\TextInput::make('sqm')
-                    ->required()->numeric(),
-                Forms\Components\TextInput::make('bedrooms')
-                    ->required()->numeric(),
-                Forms\Components\TextInput::make('bathrooms')
-                    ->required()->numeric(),
-                Forms\Components\TextInput::make('garages')
-                    ->required()->numeric(),
-                Forms\Components\Toggle::make('slider')
-                    ->required(),
-                Forms\Components\Toggle::make('visible')
-                    ->required(),
-                Forms\Components\DatePicker::make('start_date')
-                    ->required(),
-                Forms\Components\DatePicker::make('end_date')
-                    ->required(),
-            ]);
+        return $form->schema(
+            Tabs::make('Heading')
+                ->tabs([
+                    Tabs\Tab::make('Hauptdaten')
+                        ->columns(12)
+                        ->schema([
+                            Forms\Components\TextInput::make('title')
+                                ->columnSpan(12)
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\RichEditor::make('description')
+                                ->columnSpan(12)
+                                ->required()
+                                ->maxLength(65535),
+                            Forms\Components\TextInput::make('country')
+                                ->columnSpan(6)
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('city')
+                                ->columnSpan(6)
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('address')
+                                ->columnSpan(6)
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('price')
+                                ->columnSpan(3)
+                                ->required(),
+                            Forms\Components\TextInput::make('sqm')
+                                ->columnSpan(3)
+                                ->required()->numeric(),
+                            Forms\Components\TextInput::make('bedrooms')
+                                ->columnSpan(2)
+                                ->required()->numeric(),
+                            Forms\Components\TextInput::make('bathrooms')
+                                ->columnSpan(2)
+                                ->required()->numeric(),
+                            Forms\Components\TextInput::make('garages')
+                                ->columnSpan(2)
+                                ->required()->numeric(),
+                            Forms\Components\Toggle::make('slider')
+                                ->columnSpan(2)
+                                ->required(),
+                            Forms\Components\Toggle::make('visible')
+                                ->columnSpan(4)
+                                ->required(),
+                            Forms\Components\DatePicker::make('start_date')
+                                ->columnSpan(2)
+                                ->required(),
+                            Forms\Components\DatePicker::make('end_date')
+                                ->columnSpan(2)
+                                ->required(),
+                        ]),
+                    Tabs\Tab::make('Bilder')
+                        ->schema([
+                            // ...
+                        ]),
+                ])
+        );
+
+
+
+
     }
 
     public static function table(Table $table): Table
