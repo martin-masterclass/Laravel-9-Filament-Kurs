@@ -65,11 +65,11 @@ class PropertyResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
-                    ->sortable()
+                    ->sortable()->searchable()
                     ->limit(10),
                 Tables\Columns\TextColumn::make('country')
                     ->label('Land')
-                    ->sortable()
+                    ->sortable()->searchable()
                     ->limit(15),
                 Tables\Columns\TextColumn::make('price')
                     ->label('Preis')
