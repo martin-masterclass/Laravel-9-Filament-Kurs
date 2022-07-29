@@ -6,6 +6,7 @@ use App\Filament\Resources\PropertyResource\Pages;
 use App\Filament\Resources\PropertyResource\RelationManagers;
 use App\Models\Property;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Tabs;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -81,8 +82,17 @@ class PropertyResource extends Resource
                         ]),
                     Tabs\Tab::make('Bilder')
                         ->schema([
-                            // ...
-                        ]),
+                            SpatieMediaLibraryFileUpload::make('Sliderbild')
+                                ->image()
+                                ->collection('slider')
+                                ->columnSpan(6),
+                            SpatieMediaLibraryFileUpload::make('Hauptbilder (Bitte speichern!)')
+                                ->image()
+                                ->multiple()
+                                ->enableReordering()
+                                ->collection('hauptbilder')
+                                ->columnSpan(6),
+                        ])->columns(12),
                 ])
         );
 
