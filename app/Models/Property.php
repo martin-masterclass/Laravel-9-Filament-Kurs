@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -47,6 +48,14 @@ class Property extends Model implements HasMedia
             ->performOnCollections('hauptbilder')
             ->crop('crop-center', 120, 160)
             ->nonQueued();
+    }
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => number_format($value,0,'',','),
+            set: fn ($value) => preg_replace('/[^0-9]/','',$value),
+        );
     }
 
 }
