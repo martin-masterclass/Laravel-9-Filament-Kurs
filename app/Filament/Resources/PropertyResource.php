@@ -83,18 +83,18 @@ class PropertyResource extends Resource
                         ]),
                     Tabs\Tab::make('Bilder')
                         ->schema([
-                            SpatieMediaLibraryFileUpload::make('Sliderbild')
-                                ->image()
-                                ->collection('slider')
-                                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
-                                    return (string) str($file->getClientOriginalName())->prepend('real-invest-');
-                                })
-                                ->columnSpan(6),
                             SpatieMediaLibraryFileUpload::make('Hauptbilder (Bitte speichern!)')
                                 ->image()
                                 ->multiple()
                                 ->enableReordering()
                                 ->collection('hauptbilder')
+                                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
+                                    return (string) str($file->getClientOriginalName())->prepend('real-invest-');
+                                })
+                                ->columnSpan(6),
+                            SpatieMediaLibraryFileUpload::make('Sliderbild')
+                                ->image()
+                                ->collection('slider')
                                 ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
                                     return (string) str($file->getClientOriginalName())->prepend('real-invest-');
                                 })
@@ -116,6 +116,11 @@ class PropertyResource extends Resource
                     ->label('Titel')
                     ->sortable()->searchable()
                     ->limit(10),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('Hauptbild')
+                    ->collection('hauptbilder')
+                    ->conversion('thumb-hauptbild')
+                    ->width(60)
+                    ->height(80),
                 Tables\Columns\TextColumn::make('country')
                     ->label('Land')
                     ->sortable()->searchable()
@@ -141,6 +146,11 @@ class PropertyResource extends Resource
                     ->sortable()
                     ->alignCenter(),
                 Tables\Columns\BooleanColumn::make('slider'),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('Sliderbild')
+                    ->collection('slider')
+                    ->conversion('thumb-slider')
+                    ->width(140)
+                    ->height(80),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
