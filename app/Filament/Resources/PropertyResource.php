@@ -14,6 +14,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\TemporaryUploadedFile;
 
 class PropertyResource extends Resource
 {
@@ -85,12 +86,18 @@ class PropertyResource extends Resource
                             SpatieMediaLibraryFileUpload::make('Sliderbild')
                                 ->image()
                                 ->collection('slider')
+                                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
+                                    return (string) str($file->getClientOriginalName())->prepend('real-invest-');
+                                })
                                 ->columnSpan(6),
                             SpatieMediaLibraryFileUpload::make('Hauptbilder (Bitte speichern!)')
                                 ->image()
                                 ->multiple()
                                 ->enableReordering()
                                 ->collection('hauptbilder')
+                                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
+                                    return (string) str($file->getClientOriginalName())->prepend('real-invest-');
+                                })
                                 ->columnSpan(6),
                         ])->columns(12),
                 ])
