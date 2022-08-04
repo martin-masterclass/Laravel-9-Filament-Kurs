@@ -75,11 +75,9 @@ class PropertyResource extends Resource
                                 ->columnSpan(4)
                                 ->required(),
                             Forms\Components\DatePicker::make('start_date')
-                                ->columnSpan(2)
-                                ->required(),
+                                ->columnSpan(2),
                             Forms\Components\DatePicker::make('end_date')
-                                ->columnSpan(2)
-                                ->required(),
+                                ->columnSpan(2),
                         ]),
                     Tabs\Tab::make('Bilder')
                         ->schema([
@@ -116,6 +114,12 @@ class PropertyResource extends Resource
                     ->label('Titel')
                     ->sortable()->searchable()
                     ->limit(10),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Verändert')
+                    ->sortable()
+                    ->since()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->extraAttributes(['class' => 'bg-gray-200 dark:bg-primary-600']),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('Hauptbild')
                     ->collection('hauptbilder')
                     ->conversion('thumb-hauptbild')
@@ -151,7 +155,7 @@ class PropertyResource extends Resource
                     ->conversion('thumb-slider')
                     ->width(140)
                     ->height(80),
-            ])
+            ])->defaultSort('updated_at','desc')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])

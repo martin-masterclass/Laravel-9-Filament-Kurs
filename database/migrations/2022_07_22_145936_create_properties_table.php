@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('address');
             $table->unsignedInteger('price');
             $table->unsignedInteger('sqm');
-            $table->unsignedTinyInteger('bedrooms');
-            $table->unsignedTinyInteger('bathrooms');
-            $table->unsignedTinyInteger('garages');
+            $table->unsignedTinyInteger('bedrooms')->nullable();
+            $table->unsignedTinyInteger('bathrooms')->nullable();
+            $table->unsignedTinyInteger('garages')->nullable();
             $table->boolean('slider')->default(false);
             $table->boolean('visible')->default(true);
             $table->date('start_date')->default('2022-01-01');

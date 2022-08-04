@@ -24,7 +24,7 @@ class Property extends Model implements HasMedia
         'price',
         'sqm',
         'bedrooms',
-        'bathroom',
+        'bathrooms',
         'garages',
         'slider',
         'visible'
