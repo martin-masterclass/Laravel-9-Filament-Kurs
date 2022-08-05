@@ -127,7 +127,7 @@ class PropertyResource extends Resource
                     ->conversion('thumb-hauptbild')
                     ->width(60)
                     ->height(80)
-                    ->visibleFrom('sm   '),
+                    ->visibleFrom('sm'),
                 Tables\Columns\TextColumn::make('country')
                     ->label('Land')
                     ->sortable()->searchable()
