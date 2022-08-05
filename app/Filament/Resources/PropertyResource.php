@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\TemporaryUploadedFile;
 
@@ -113,7 +114,8 @@ class PropertyResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
                     ->sortable()->searchable()
-                    ->limit(10),
+                    ->limit(10)
+                    ->tooltip(fn (Model $record): string => "{$record->title}"),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Verändert')
                     ->sortable()
@@ -124,11 +126,13 @@ class PropertyResource extends Resource
                     ->collection('hauptbilder')
                     ->conversion('thumb-hauptbild')
                     ->width(60)
-                    ->height(80),
+                    ->height(80)
+                    ->visibleFrom('sm'),
                 Tables\Columns\TextColumn::make('country')
                     ->label('Land')
                     ->sortable()->searchable()
-                    ->limit(15),
+                    ->limit(15)
+                    ->tooltip(fn (Model $record): string => "{$record->country}"),
                 Tables\Columns\TextColumn::make('price')
                     ->label('Preis')
                     ->sortable()
@@ -136,25 +140,31 @@ class PropertyResource extends Resource
                 Tables\Columns\TextColumn::make('sqm')
                     ->label('QM')
                     ->sortable()
-                    ->alignRight(),
+                    ->alignRight()
+                    ->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('bedrooms')
                     ->label('Schlafz.')
                     ->sortable()
-                    ->alignCenter(),
+                    ->alignCenter()
+                    ->visibleFrom('lg'),
                 Tables\Columns\TextColumn::make('bathrooms')
                     ->label('Bäder')
                     ->sortable()
-                    ->alignCenter(),
+                    ->alignCenter()
+                    ->visibleFrom('lg'),
                 Tables\Columns\TextColumn::make('garages')
                     ->label('Garage')
                     ->sortable()
-                    ->alignCenter(),
-                Tables\Columns\BooleanColumn::make('slider'),
+                    ->alignCenter()
+                    ->visibleFrom('lg'),
+                Tables\Columns\BooleanColumn::make('slider')
+                    ->visibleFrom('md'),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('Sliderbild')
                     ->collection('slider')
                     ->conversion('thumb-slider')
                     ->width(140)
-                    ->height(80),
+                    ->height(80)
+                    ->visibleFrom('xl'),
             ])->defaultSort('updated_at','desc')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
