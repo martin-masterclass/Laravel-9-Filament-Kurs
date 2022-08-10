@@ -53,8 +53,8 @@ class Property extends Model implements HasMedia
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => number_format($value,0,'',','),
-            set: fn ($value) => preg_replace('/[^0-9]/','',$value),
+            get: fn ($value) => number_format(intval($value),0,'',','),
+            set: fn ($value) => preg_replace('/[^0-9]/','',intval($value)),
         );
     }
 
