@@ -6,6 +6,7 @@ use App\Filament\Resources\PropertyResource\Pages;
 use App\Filament\Resources\PropertyResource\RelationManagers;
 use App\Models\Property;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Tabs;
 use Filament\Resources\Form;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\TemporaryUploadedFile;
+use Squire\Models\Country;
 
 class PropertyResource extends Resource
 {
@@ -42,10 +44,12 @@ class PropertyResource extends Resource
                                 ->columnSpan(12)
                                 ->required()
                                 ->maxLength(65535),
-                            Forms\Components\TextInput::make('country')
+                            Select::make('country')
+                                ->label('Land')
+                                ->options(Country::all()->pluck('name', 'name'))
+                                ->searchable()
                                 ->columnSpan(6)
-                                ->required()
-                                ->maxLength(255),
+                                ->required(),
                             Forms\Components\TextInput::make('city')
                                 ->columnSpan(6)
                                 ->required()
