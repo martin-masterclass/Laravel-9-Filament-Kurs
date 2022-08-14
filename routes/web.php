@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('startseite');
-});
+Route::get('/', 'App\Http\Controllers\StartseitenController@getStartseitenData');
 
 Route::middleware([
     'auth:sanctum',
