@@ -1,6 +1,8 @@
+
+
 <x-frontend.layout>
 
-<x-frontend.slider></x-frontend.slider>
+<x-frontend.slider :slider="$slider"></x-frontend.slider>
 
 <main id="main">
 

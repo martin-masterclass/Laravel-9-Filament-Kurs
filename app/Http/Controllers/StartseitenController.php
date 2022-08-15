@@ -27,12 +27,13 @@ class StartseitenController extends Controller
             ->take(4)
             ->get();;
 
-        dd($neuesteProjekte);
-
-
+        //dd($neuesteProjekte);
         //dd($slider);
 
-        return view('pages.startseite');
+        return view('pages.startseite', [
+            'slider' => $slider,
+            'neuesteProjekte' => $neuesteProjekte
+        ]);
 
     }
 }
